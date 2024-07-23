@@ -366,6 +366,15 @@ export default {
 		};
 	},
 	computed: {
+		filteredItems() {
+			// 'all' 선택 시 모든 아이템을 보여줌
+			if (this.filters.status === 'all' || this.filters.status === '') {
+				return this.items;
+			} else {
+				// 그 외에는 선택된 status와 일치하는 아이템만 필터링
+				return this.items.filter(item => item.status === this.filters.status);
+			}
+		},
 		paginatedItems() {
 			const start = (this.currentPage - 1) * this.viewCount;
 			const end = this.currentPage * this.viewCount;
